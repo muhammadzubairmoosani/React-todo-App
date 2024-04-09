@@ -1,62 +1,62 @@
-import React from 'react';
-import TodoInput from './Components/TodoInput';
-import TodoList from './Components/TodoList';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import uuid from 'uuid';
+import React from "react";
+import TodoInput from "./Components/TodoInput";
+import TodoList from "./Components/TodoList";
+import "bootstrap/dist/css/bootstrap.min.css";
+import uuid from "uuid";
 
 class App extends React.Component {
   state = {
     items: [],
     id: uuid(),
-    item: '',
-    editItem: false
-  }
-  handleChange = e => {
+    item: "",
+    editItem: false,
+  };
+  handleChange = (e) => {
     this.setState({
-      item: e.target.value
+      item: e.target.value,
     });
   };
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const newItem = {
       id: this.state.id,
-      title: this.state.item
-    }
+      title: this.state.item,
+    };
     const updateItems = [...this.state.items, newItem];
     this.setState({
       items: updateItems,
-      item: '',
+      item: "",
       id: uuid(),
-      editItem: false
+      editItem: false,
     });
-  }
+  };
   clearList = () => {
     this.setState({
-      items: []
+      items: [],
     });
-  }
-  handleDelete = id => {
-    const filteredItems = this.state.items.filter(item => item.id !== id);
+  };
+  handleDelete = (id) => {
+    const filteredItems = this.state.items.filter((item) => item.id !== id);
     this.setState({
-      items: filteredItems
+      items: filteredItems,
     });
-  }
-  handleEdit = id => {
-    const filteredItems = this.state.items.filter(item => item.id !== id);
-    const selectedItems = this.state.items.find(item => item.id === id);
+  };
+  handleEdit = (id) => {
+    const filteredItems = this.state.items.filter((item) => item.id !== id);
+    const selectedItems = this.state.items.find((item) => item.id === id);
     this.setState({
       items: filteredItems,
       item: selectedItems.title,
       editItem: true,
-      id: id
+      id: id,
     });
-  }
+  };
   render() {
     return (
       <div className="container">
         <div className="row">
           <div className="mx-auto col-md-8 col-lg-6 col-xl-6 mt-4">
-            <h3 className='text-capitalize text-center'>todo input</h3>
+            <h3 className="text-capitalize text-center">Todo App</h3>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}
